@@ -1,2 +1,2 @@
-# kaydevops
+# Shdevops
 GCP devops learning session

@@ -16,15 +16,15 @@ variable "region" {
 
 variable "cluster_name" {
   description = "The name of the GKE cluster"
-  default     = "infra1-gke-cluster"
+  default     = "shdemo1-gke-cluster"
 }
 
 variable "network_name" {
   description = "The name of the VPC network"
-  default     = "infra1-vpc-network"
+  default     = "shdemo1-vpc-network"
 }
 
 variable "subnetwork_name" {
   description = "The name of the VPC subnetwork"
-  default     = "infra-subnetwork"
+  default     = "shdemo1-subnetwork"
 }

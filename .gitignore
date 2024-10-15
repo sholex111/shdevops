@@ -1,3 +1,12 @@
 #to be ignored
 
 *.txt
+
+.terraform/
+
+.terraform.lock*
+
+terraform.tfstate*
+
+.terraform.tfstate*
+
