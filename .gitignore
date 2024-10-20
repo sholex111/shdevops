@@ -1,7 +1,5 @@
 #to be ignored
 
-*.txt
-
 .terraform/
 
 .terraform.lock*
