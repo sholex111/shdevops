@@ -1,0 +1,50 @@
+steps:
+  # Step 1: Build the Docker image from the Dockerfile in the root directory.
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/hello-world:latest', '.']
+
+  # Step 2: Push the Docker image to Google Container Registry (GCR).
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/hello-world:latest']
+
+  # Step 3: Set up GKE authentication for the region.
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'  # Use the cloud-sdk image
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        echo "Authenticating with GKE in the region..."
+        gcloud container clusters get-credentials infra1-gke-cluster --region us-central1 --project $PROJECT_ID
+
+  # Step 4: Create the new namespace if it doesn't exist.
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        echo "Creating namespace 'microservices' if it doesn't exist..."
+        kubectl get namespace microservices || kubectl create namespace microservices
+
+  # Step 5: Deploy the image to GKE using Helm in the specified namespace.
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'  # Use the cloud-sdk image
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        echo "Installing Helm..."
+        curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+        echo "Deploying to GKE with Helm in the 'microservices' namespace..."
+        helm upgrade --install hello-world ./helm-chart \
+        --set image.repository=gcr.io/$PROJECT_ID/hello-world \
+        --set image.tag=latest \
+        --namespace microservices \
+        --create-namespace
+    env:
+      - 'CLOUDSDK_COMPUTE_REGION=us-central1'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=infra1-gke-cluster'
+
+# Optional: Set the service account if necessary for specific permissions.
+serviceAccount: "309049219015-compute@developer.gserviceaccount.com"
+
+# Specify logs bucket for Cloud Build logs.
+logsBucket: "gs://cloudbuild-shdemo01"  # Replace with your actual bucket name.

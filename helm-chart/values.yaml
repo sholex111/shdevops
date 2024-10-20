@@ -1,0 +1,15 @@
+# values.yaml
+
+# Namespace to deploy into
+namespace: microservices
+
+# Number of replicas
+replicas: 2
+
+# Image settings
+image:
+  repository: europe-west1-docker.pkg.dev/kaydemo2/hello/hello-world  # Updated image reference
+  tag: latest
+
+# Container port
+containerPort: 8080
