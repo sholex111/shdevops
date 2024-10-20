@@ -14,7 +14,7 @@ steps:
       - '-c'
       - |
         echo "Authenticating with GKE in the region..."
-        gcloud container clusters get-credentials infra1-gke-cluster --region us-central1 --project $PROJECT_ID
+        gcloud container clusters get-credentials shdemo1-gke-cluster --region us-central1 --project $PROJECT_ID
 
   # Step 4: Create the new namespace if it doesn't exist.
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -41,7 +41,7 @@ steps:
         --create-namespace
     env:
       - 'CLOUDSDK_COMPUTE_REGION=us-central1'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=infra1-gke-cluster'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=shdemo1-gke-cluster'
 
 # Optional: Set the service account if necessary for specific permissions.
 serviceAccount: "309049219015-compute@developer.gserviceaccount.com"
