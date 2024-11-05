@@ -14,7 +14,7 @@ steps:
       - '-c'
       - |
         echo "Authenticating with GKE in the region..."
-        gcloud container clusters get-credentials shdemo1-gke-cluster --region us-central1 --project $PROJECT_ID
+        gcloud container clusters get-credentials shoxapp1-gke-cluster --region us-central1 --project $PROJECT_ID
 
   # Step 4: Create the new namespace if it doesn't exist.
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
