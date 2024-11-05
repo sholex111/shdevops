@@ -41,10 +41,10 @@ steps:
         --create-namespace
     env:
       - 'CLOUDSDK_COMPUTE_REGION=us-central1'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=shdemo1-gke-cluster'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=shoxapp1-gke-cluster'
 
 # Optional: Set the service account if necessary for specific permissions.
-serviceAccount: "309049219015-compute@developer.gserviceaccount.com"
+serviceAccount: "403363086677-compute@developer.gserviceaccount.com"
 
 # Specify logs bucket for Cloud Build logs.
-logsBucket: "gs://cloudbuild-shdemo01"  # Replace with your actual bucket name.
+logsBucket: "gs://cloudbuild-shoxapp1"  # Replace with your actual bucket name.

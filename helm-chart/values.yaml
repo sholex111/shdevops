@@ -8,7 +8,7 @@ replicas: 2
 
 # Image settings
 image:
-  repository: europe-west1-docker.pkg.dev/kaydemo2/hello/hello-world  # Updated image reference
+  repository: europe-west1-docker.pkg.dev/shoxapp/hello/hello-world  # Updated image reference
   tag: latest
 
 # Container port
